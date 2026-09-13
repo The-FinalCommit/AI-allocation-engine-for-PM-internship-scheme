@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f4f6f9;
+  --ink: #0c1b33;
+  --saffron: #ee8420;
+  --leaf: #1b8a5a;
+}
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-[var(--paper)] text-[var(--ink)] antialiased;
+  font-family: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.font-display { font-family: 'Sora Variable', Sora, Inter, system-ui, sans-serif; }
+
+/* Sidebar */
+.sidebar-glass {
+  background:
+    radial-gradient(1200px 400px at -10% -10%, rgba(238, 132, 32, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 120% 110%, rgba(27, 138, 90, 0.10), transparent 55%),
+    linear-gradient(165deg, #0f2242 0%, #0c1b33 55%, #0a1730 100%);
+}
+.nav-item { @apply flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[13.5px] font-medium text-navy-200/80 transition-all duration-150 hover:bg-white/[0.06] hover:text-white; }
+.nav-item.active { @apply bg-white/[0.09] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]; }
+.nav-item.active .nav-ico { @apply text-saffron-400; }
+.nav-ico { @apply h-[18px] w-[18px] shrink-0; }
+
+/* Cards */
+.card { @apply rounded-2xl border border-navy-900/[0.07] bg-white shadow-[0_1px_2px_rgba(12,27,51,0.04),0_8px_24px_-12px_rgba(12,27,51,0.10)]; }
+.card-hover { @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(12,27,51,0.05),0_16px_32px_-12px_rgba(12,27,51,0.16)]; }
+.chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11.5px] font-semibold; }
+
+/* Buttons */
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-xl text-sm font-semibold transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50; }
+.btn-primary { @apply btn bg-gradient-to-b from-saffron-400 to-saffron-600 px-4 py-2.5 text-white shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_8px_20px_-8px_rgba(238,132,32,0.55)] hover:brightness-[1.04] active:brightness-95; }
+.btn-dark { @apply btn bg-ink px-4 py-2.5 text-white hover:bg-navy-800; }
+.btn-ghost { @apply btn border border-navy-900/10 bg-white px-4 py-2.5 text-navy-800 hover:bg-navy-50; }
+.btn-danger { @apply btn bg-red-50 px-4 py-2.5 text-red-700 ring-1 ring-red-200 hover:bg-red-100; }
+.btn-sm { @apply px-3 py-1.5 text-[13px]; }
+
+/* Inputs */
+.input { @apply w-full rounded-xl border border-navy-900/10 bg-white px-3.5 py-2.5 text-sm text-ink shadow-[inset_0_1px_2px_rgba(12,27,51,0.04)] outline-none transition focus:border-saffron-400 focus:ring-2 focus:ring-saffron-200; }
+.label { @apply mb-1.5 block text-[12.5px] font-semibold text-navy-700; }
+
+/* Tables */
+.th { @apply px-4 py-2.5 text-left text-[11px] font-bold uppercase tracking-[0.08em] text-navy-500; }
+.td { @apply px-4 py-3 text-[13.5px] text-navy-800; }
+.tr-hover { @apply transition-colors hover:bg-navy-50/60; }
+
+/* Animations */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .35s cubic-bezier(.2,.7,.3,1) both; }
+@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.pulse-dot { animation: pulseDot 1.6s ease-in-out infinite; }
+@keyframes shimmer { from { background-position: -400px 0; } to { background-position: 400px 0; } }
+.skeleton { @apply rounded-lg bg-navy-100/70; background-image: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); background-size: 400px 100%; background-repeat: no-repeat; animation: shimmer 1.3s infinite; }
+
+/* Scrollbars */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: #c3cfe0; border-radius: 8px; border: 2px solid var(--paper); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Leaflet */
+.leaflet-container { @apply rounded-xl; font-family: inherit; }
+.leaflet-popup-content { font-family: inherit; }
+
+/* Stage timeline */
+.stage-line { @apply h-[3px] w-full rounded-full bg-navy-100; }
+.stage-fill { @apply h-[3px] rounded-full bg-gradient-to-r from-saffron-400 to-saffron-600; }

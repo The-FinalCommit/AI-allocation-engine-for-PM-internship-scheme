@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: pragati-backend
+  datasource:
+    url: jdbc:h2:mem:pragati;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+  compression:
+    enabled: true
+    mime-types: application/json,application/javascript,text/css,image/svg+xml
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: never
+
+pragati:
+  jwt:
+    # Demo-only secret (fixed for the synthetic demonstration environment).
+    secret: "pragati-sih25033-demo-signing-secret-0123456789abcdef"
+    expiry-minutes: 720
+  ai:
+    service-url: ${PRAGATI_AI_URL:http://127.0.0.1:8000}
+    timeout-seconds: 30
+  optimizer:
+    timeout-seconds: 180
+    max-wall-seconds: 120
+  web:
+    static-dir: ${PRAGATI_STATIC_DIR:./frontend-dist}
+    dev-origins: http://localhost:5173,http://127.0.0.1:5173
+  uploads:
+    dir: ${PRAGATI_UPLOADS_DIR:./data/uploads}
+  rate-limit:
+    login-per-minute: 8
+
+logging:
+  level:
+    root: INFO
+    in.pragati: INFO

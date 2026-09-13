@@ -1,0 +1,41 @@
+# PRAGATI — one-command demo (Docker)
+#   docker compose up --build
+# Then open http://localhost:8080  (the entire product: UI + API + AI service)
+#
+# Services:
+#   ai-service  : Python FastAPI — deterministic skill intelligence + OR-Tools CP-SAT optimizer
+#   backend     : Java 17 Spring Boot — API, security, data, and serves the built frontend (port 8080)
+
+services:
+  ai-service:
+    image: python:3.11-slim
+    working_dir: /app
+    command: sh -c "pip install --no-cache-dir -q -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 8000"
+    volumes:
+      - ./ai-service:/app
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).status==200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      PRAGATI_AI_URL: http://ai-service:8000
+      PRAGATI_STATIC_DIR: /app/frontend-dist
+      PRAGATI_UPLOADS_DIR: /app/data/uploads
+    ports:
+      - "8080:8080"
+    volumes:
+      - uploads:/app/data/uploads
+    depends_on:
+      ai-service:
+        condition: service_started
+
+volumes:
+  uploads:
