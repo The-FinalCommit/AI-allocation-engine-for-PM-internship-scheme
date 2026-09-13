@@ -13,7 +13,6 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-OR--Tools%20CP--SAT-009688?logo=fastapi&logoColor=white)](ai-service)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](frontend)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](frontend)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![License](https://img.shields.io/badge/License-MIT-informational)](#license)
 
 </div>
